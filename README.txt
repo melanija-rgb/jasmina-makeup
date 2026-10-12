@@ -3,7 +3,7 @@ JASMINA MAKEUP - web stranica
 FAJLOVI
   index.html   glavna stranica (usluge, forma za termine, kontakt, Google Maps)
   admin.html   admin stranica (prijava sa šifrom, pregled i upravljanje terminima)
-  style.css    izgled (blijedo roza pozadina, crna slova sa zlatnim rubom)
+  style.css    izgled (crna pozadina, zlatna slova)
   storage.js   čuvanje termina i provjera šifre
 
 ADMIN

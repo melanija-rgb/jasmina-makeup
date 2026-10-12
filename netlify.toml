@@ -1,0 +1,6 @@
+# Stara adresa admin.html vodi na zasebnu admin stranicu.
+# Sama stranica je admin/index.html i dijeli storage.js sa glavnom stranicom.
+[[redirects]]
+  from = "/admin.html"
+  to = "/admin/"
+  status = 301

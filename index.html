@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#070605">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,600;0,6..96,700;1,6..96,600;1,6..96,700;1,6..96,800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -49,11 +49,11 @@
       <hr class="gold-line">
       <p class="section-sub">Svaki izgled prilagođen vama, od svakodnevnog sjaja do velikih događaja.</p>
       <div class="grid">
-        <div class="card"><div class="icon">💄</div><h3>Dnevna šminka</h3><p>Svjež i prirodan izgled za svaki dan.</p></div>
-        <div class="card"><div class="icon">✨</div><h3>Večernja šminka</h3><p>Izražajan look za izlaske i proslave.</p></div>
-        <div class="card"><div class="icon">👰</div><h3>Mladenačka šminka</h3><p>Savršen izgled za najvažniji dan.</p></div>
-        <div class="card"><div class="icon">🎓</div><h3>Maturska šminka</h3><p>Za maturu, svečanosti i fotografisanja.</p></div>
-        <div class="card"><div class="icon">🌸</div><h3>Probna šminka</h3><p>Isprobajte look prije velikog događaja.</p></div>
+        <div class="card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="7"/><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11 11l3.5 3.5M33.5 33.5L37 37M37 11l-3.5 3.5M14.5 33.5L11 37"/></svg></div><h3>Dnevna šminka</h3><p>Svjež i prirodan izgled za svaki dan.</p></div>
+        <div class="card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M30 12a11 11 0 1 0 8 16 9 9 0 1 1-8-16z"/><path d="M16 10l.8 2.4L19.2 13l-2.4.8L16 16.2l-.8-2.4L12.8 13l2.4-.6z"/></svg></div><h3>Večernja šminka</h3><p>Izražajan look za izlaske i proslave.</p></div>
+        <div class="card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 8l3.2 6.4L34 16l-5 4.2L30.4 27 24 23.4 17.6 27 19 20.2 14 16l6.8-1.6z"/><circle cx="24" cy="34" r="6"/></svg></div><h3>Mladenačka šminka</h3><p>Savršen izgled za najvažniji dan.</p></div>
+        <div class="card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 20l16-8 16 8-16 8z"/><path d="M16 24v8c0 3 3.6 6 8 6s8-3 8-6v-8"/><path d="M40 20v10"/></svg></div><h3>Maturska šminka</h3><p>Za maturu, svečanosti i fotografisanja.</p></div>
+        <div class="card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="3.2"/><circle cx="24" cy="13" r="4"/><circle cx="24" cy="35" r="4"/><circle cx="13" cy="24" r="4"/><circle cx="35" cy="24" r="4"/><path d="M24 28v12"/></svg></div><h3>Probna šminka</h3><p>Isprobajte look prije velikog događaja.</p></div>
       </div>
       <div class="center-cta">
         <a href="#zakazivanje" class="btn btn-book">Zakaži termin</a>
@@ -118,15 +118,14 @@
     <div class="container">
       <h2 class="section-title outline">Kontakt</h2>
       <hr class="gold-line">
-      <p class="section-sub">Slobodno nazovite ili posjetite salon.</p>
       <div class="contact-grid">
         <div class="contact-info">
           <div class="card contact-item">
-            <div class="ci">📞</div>
+            <div class="ci" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M16 10h6l2 6-4 2a16 16 0 0 0 8 8l2-4 6 2v6c0 1.2-1 2.2-2.2 2A24 24 0 0 1 14 12.2C13.8 11 14.8 10 16 10z"/></svg></div>
             <div><strong>Telefon</strong><a class="phone-link" href="tel:+38765480296">065 480 296</a><br><span class="hint">Dodirnite broj za direktan poziv</span></div>
           </div>
           <div class="card contact-item">
-            <div class="ci">📍</div>
+            <div class="ci" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 42s12-11 12-20a12 12 0 1 0-24 0c0 9 12 20 12 20z"/><circle cx="24" cy="22" r="4"/></svg></div>
             <div><strong>Adresa</strong>Stefana Nemanje 13<br>78220 Kotor Varoš<br>Bosna i Hercegovina</div>
           </div>
           <div class="contact-actions">
@@ -157,10 +156,25 @@
   <a class="call-fab" href="tel:+38765480296" aria-label="Pozovi 065 480 296">📞</a>
 </div>
 
+<button type="button" class="to-top" id="toTop" aria-label="Nazad na vrh">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6"/><path d="M6 11l6-6 6 6"/></svg>
+</button>
+
 <script src="storage.js"></script>
 <script>
 (function(){
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  var toTop = document.getElementById('toTop');
+  function toggleToTop(){
+    toTop.classList.toggle('is-visible', window.scrollY > 420);
+  }
+  toggleToTop();
+  window.addEventListener('scroll', toggleToTop, {passive:true});
+  toTop.addEventListener('click', function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'});
+  });
 
   // Dijagonalni naslov ostaje cijeli unutar scene (posebno na uskom ekranu).
   var stage = document.querySelector('.shine-stage');

@@ -254,6 +254,26 @@ header.nav{
   from{background-position:0% 50%}
   to{background-position:100% 50%}
 }
+.starfield{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;
+}
+.starfield .star{
+  position:absolute;display:block;pointer-events:none;
+  color:var(--gold-light);opacity:.85;
+  filter:drop-shadow(0 0 3px rgba(248,231,176,.75));
+  animation:twinkle 3.8s ease-in-out infinite;
+}
+.starfield .star path{fill:currentColor}
+.sa{left:0;top:14%;width:9px;height:9px}
+.sb{left:6px;top:48%;width:6px;height:6px;animation-duration:4.6s;animation-delay:1.1s}
+.sc{left:1px;bottom:16%;width:7px;height:7px;animation-delay:2.1s}
+.sd{right:0;top:22%;width:7px;height:7px;animation-duration:3.3s;animation-delay:.5s}
+.se{right:6px;top:54%;width:10px;height:10px;animation-delay:1.6s}
+.sf{right:1px;bottom:12%;width:5px;height:5px;animation-duration:5s;animation-delay:2.6s}
+@keyframes twinkle{
+  0%,100%{opacity:.18;transform:scale(.68)}
+  50%{opacity:1;transform:scale(1)}
+}
 .sparkle{
   position:absolute;
   color:var(--gold-light);
@@ -489,6 +509,8 @@ dialog::backdrop{background:rgba(0,0,0,.62)}
   .shine span{display:block}
   .shine-stage{padding:4px 0}
   .s1,.s2{display:none}
+  .starfield .star{width:7px;height:7px}
+  .se{width:6px;height:6px}
 }
 @media (max-width:720px){
   :root{--nav-h:64px}
@@ -529,6 +551,6 @@ dialog::backdrop{background:rgba(0,0,0,.62)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .btn-book,.shine span{animation:none}
+  .btn-book,.shine span,.starfield .star{animation:none}
   .btn,.card,.slot,.to-top{transition:none}
 }

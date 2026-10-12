@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jasmina MakeUp | Get ready to shine</title>
 <meta name="description" content="Jasmina MakeUp, profesionalno šminkanje u Kotor Varošu. Get ready to shine. Zakažite termin online.">
-<meta name="theme-color" content="#fde8ee">
+<meta name="theme-color" content="#070605">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,600;0,6..96,700;1,6..96,600;1,6..96,700;1,6..96,800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,21 +19,25 @@
     <button class="nav-toggle" id="navToggle" aria-label="Meni" aria-expanded="false">☰</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#usluge">Usluge</a></li>
-      <li><a href="#zakazivanje">Zakaži termin</a></li>
+      <li><a href="#zakazivanje" class="btn small btn-book">Zakaži termin</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
-      <li><a href="tel:+38765480296" class="btn small">📞 065 480 296</a></li>
+      <li><a href="tel:+38765480296" class="btn small light">📞 065 480 296</a></li>
     </ul>
   </div>
 </header>
 
 <main id="top">
   <section class="hero">
-    <div class="container">
+    <div class="hero-frame">
+      <span class="sparkle s1" aria-hidden="true">✦</span>
+      <span class="sparkle s2" aria-hidden="true">✦</span>
       <p class="eyebrow">Profesionalno šminkanje · Kotor Varoš</p>
-      <h1 class="outline">Jasmina MakeUp</h1>
-      <p class="slogan outline"><span class="sparkle">✦</span> Get ready to shine <span class="sparkle">✦</span></p>
+      <p class="brand-mark outline">Jasmina MakeUp</p>
+      <div class="shine-stage">
+        <h1 class="shine"><span>Get ready</span> <span>to shine</span></h1>
+      </div>
       <div class="hero-actions">
-        <a href="#zakazivanje" class="btn">Zakaži termin</a>
+        <a href="#zakazivanje" class="btn btn-book">Zakaži termin</a>
         <a href="tel:+38765480296" class="btn light">📞 Pozovi odmah</a>
       </div>
     </div>
@@ -51,10 +55,13 @@
         <div class="card"><div class="icon">🎓</div><h3>Maturska šminka</h3><p>Za maturu, svečanosti i fotografisanja.</p></div>
         <div class="card"><div class="icon">🌸</div><h3>Probna šminka</h3><p>Isprobajte look prije velikog događaja.</p></div>
       </div>
+      <div class="center-cta">
+        <a href="#zakazivanje" class="btn btn-book">Zakaži termin</a>
+      </div>
     </div>
   </section>
 
-  <section id="zakazivanje" style="background:linear-gradient(180deg,var(--pink),#fff3f6)">
+  <section id="zakazivanje">
     <div class="container">
       <h2 class="section-title outline">Zakaži termin</h2>
       <hr class="gold-line">
@@ -101,7 +108,7 @@
           <textarea id="note" name="note" maxlength="400" placeholder="Npr. lokacija, broj osoba, posebni zahtjevi…"></textarea>
         </div>
 
-        <button class="btn" type="submit" style="width:100%">Pošalji zahtjev za termin</button>
+        <button class="btn btn-book block" type="submit">Pošalji zahtjev za termin</button>
         <div class="msg" id="formMsg" role="status" aria-live="polite"></div>
       </form>
     </div>
@@ -116,14 +123,17 @@
         <div class="contact-info">
           <div class="card contact-item">
             <div class="ci">📞</div>
-            <div><strong>Telefon</strong><a href="tel:+38765480296" style="font-weight:700;font-size:1.2rem">065 480 296</a><br><span class="hint">Dodirnite broj za direktan poziv</span></div>
+            <div><strong>Telefon</strong><a class="phone-link" href="tel:+38765480296">065 480 296</a><br><span class="hint">Dodirnite broj za direktan poziv</span></div>
           </div>
           <div class="card contact-item">
             <div class="ci">📍</div>
             <div><strong>Adresa</strong>Stefana Nemanje 13<br>78220 Kotor Varoš<br>Bosna i Hercegovina</div>
           </div>
-          <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=44.620443,17.371118" target="_blank" rel="noopener">🧭 Prikaži put do nas</a>
-          <a class="btn light" href="tel:+38765480296">📞 Pozovi</a>
+          <div class="contact-actions">
+            <a class="btn btn-book" href="#zakazivanje">Zakaži termin</a>
+            <a class="btn light" href="https://www.google.com/maps/dir/?api=1&destination=44.620443,17.371118" target="_blank" rel="noopener">🧭 Prikaži put do nas</a>
+            <a class="btn light" href="tel:+38765480296">📞 Pozovi</a>
+          </div>
         </div>
         <div class="map">
           <iframe title="Jasmina MakeUp na Google mapi"
@@ -142,12 +152,39 @@
   <p style="margin-top:10px"><small>© <span id="year"></span> Jasmina MakeUp · <a href="admin.html">Admin</a></small></p>
 </footer>
 
-<a class="call-fab" href="tel:+38765480296" aria-label="Pozovi 065 480 296">📞</a>
+<div class="book-bar">
+  <a class="btn btn-book" href="#zakazivanje">Zakaži termin</a>
+  <a class="call-fab" href="tel:+38765480296" aria-label="Pozovi 065 480 296">📞</a>
+</div>
 
 <script src="storage.js"></script>
 <script>
 (function(){
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Dijagonalni naslov ostaje cijeli unutar scene (posebno na uskom ekranu).
+  var stage = document.querySelector('.shine-stage');
+  var shine = document.querySelector('.shine');
+  function fitShine(){
+    if(!stage || !shine) return;
+    shine.style.fontSize = '';
+    var size = parseFloat(getComputedStyle(shine).fontSize);
+    var limit = stage.clientWidth - 2;
+    var guard = 0;
+    while(guard++ < 50 && size > 18){
+      var r = shine.getBoundingClientRect();
+      var sr = stage.getBoundingClientRect();
+      var inside = r.left >= sr.left - 1 && r.right <= sr.right + 1 && r.width <= limit + 1;
+      if(inside) break;
+      size *= 0.96;
+      shine.style.fontSize = size.toFixed(2) + 'px';
+    }
+    var box = shine.getBoundingClientRect();
+    stage.style.minHeight = Math.ceil(box.height + 8) + 'px';
+  }
+  fitShine();
+  window.addEventListener('resize', fitShine);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitShine);
 
   // Mobilni meni
   var toggle = document.getElementById('navToggle'), links = document.getElementById('navLinks');

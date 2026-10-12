@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body class="admin-body">
 
@@ -25,7 +25,7 @@
       <button class="btn" type="submit" style="width:100%">Prijavi se</button>
       <div class="msg" id="loginMsg" role="alert"></div>
     </form>
-    <p style="text-align:center;margin-top:20px"><a href="index.html">← Nazad na glavnu stranicu</a></p>
+    <p style="text-align:center;margin-top:20px"><a href="/">← Nazad na glavnu stranicu</a></p>
   </div>
 </div>
 
@@ -33,9 +33,9 @@
 <div id="panelView" hidden>
   <header class="nav">
     <div class="container nav-inner">
-      <a href="index.html" class="brand outline">Jasmina MakeUp</a>
+      <a href="/" class="brand outline">Jasmina MakeUp</a>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <a class="btn small light" href="index.html">Glavna stranica</a>
+        <a class="btn small light" href="/">Glavna stranica</a>
         <button class="btn small" id="logoutBtn">Odjava</button>
       </div>
     </div>
@@ -81,7 +81,7 @@
   </form>
 </dialog>
 
-<script src="storage.js"></script>
+<script src="/storage.js"></script>
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };

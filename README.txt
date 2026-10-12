@@ -2,12 +2,12 @@ JASMINA MAKEUP - web stranica
 
 FAJLOVI
   index.html   glavna stranica (usluge, forma za termine, kontakt, Google Maps)
-  admin.html   admin stranica (prijava sa šifrom, pregled i upravljanje terminima)
+  admin/index.html   admin stranica (prijava sa šifrom, pregled i upravljanje terminima)
   style.css    izgled (crna pozadina, zlatna slova)
   storage.js   čuvanje termina i provjera šifre
 
 ADMIN
-  Adresa:  admin.html (link "Admin" je u podnožju glavne stranice)
+  Adresa:  /admin (link "Admin" je u podnožju glavne stranice)
   Početna šifra: Jasmina2026!
   Odmah nakon prve prijave kliknite "Promijeni šifru".
 

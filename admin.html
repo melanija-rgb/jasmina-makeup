@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin | Jasmina MakeUp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+<!-- PRIJAVA -->
+<div id="loginView" hidden>
+  <div class="login-box">
+    <h1 class="outline">Admin prijava</h1>
+    <p style="text-align:center;margin-bottom:22px">Jasmina MakeUp</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="pass">Šifra</label>
+        <input id="pass" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn" type="submit" style="width:100%">Prijavi se</button>
+      <div class="msg" id="loginMsg" role="alert"></div>
+    </form>
+    <p style="text-align:center;margin-top:20px"><a href="index.html">← Nazad na glavnu stranicu</a></p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="panelView" hidden>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand outline">Jasmina MakeUp</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn small light" href="index.html">Glavna stranica</a>
+        <button class="btn small" id="logoutBtn">Odjava</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-bottom:60px">
+    <div class="admin-top">
+      <h1 class="outline">Termini</h1>
+      <button class="btn small light" id="passBtn">🔑 Promijeni šifru</button>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Pretraga (ime, telefon, usluga)…">
+      <select id="statusFilter">
+        <option value="">Svi statusi</option>
+        <option value="novi">Novi</option>
+        <option value="potvrdjen">Potvrđeni</option>
+        <option value="otkazan">Otkazani</option>
+      </select>
+      <select id="rangeFilter">
+        <option value="upcoming">Nadolazeći</option>
+        <option value="all">Svi</option>
+        <option value="past">Prošli</option>
+      </select>
+    </div>
+
+    <div id="list"></div>
+  </main>
+</div>
+
+<dialog id="passDialog">
+  <form id="passForm">
+    <h2 class="outline" style="margin-bottom:14px">Nova šifra</h2>
+    <div class="field"><label for="newPass">Nova šifra (min. 6 znakova)</label><input id="newPass" type="password" minlength="6" required autocomplete="new-password"></div>
+    <div class="field"><label for="newPass2">Ponovite šifru</label><input id="newPass2" type="password" minlength="6" required autocomplete="new-password"></div>
+    <div class="msg" id="passMsg"></div>
+    <div style="display:flex;gap:10px;margin-top:14px">
+      <button class="btn small" type="submit">Sačuvaj</button>
+      <button class="btn small light" type="button" id="passCancel">Zatvori</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="storage.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var loginView = $('loginView'), panelView = $('panelView');
+  var attempts = 0, lockedUntil = 0;
+
+  function showView(){
+    var on = JMU.isLoggedIn();
+    loginView.hidden = on; panelView.hidden = !on;
+    if(on) render(); else $('pass').focus();
+  }
+
+  $('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var m = $('loginMsg');
+    if(Date.now() < lockedUntil){
+      m.className='msg err'; m.textContent='Previše pokušaja. Pokušajte ponovo za nekoliko sekundi.'; return;
+    }
+    if(JMU.checkPass($('pass').value)){
+      attempts = 0; JMU.login(); $('pass').value=''; m.className='msg'; showView();
+    } else {
+      attempts++;
+      if(attempts >= 5){ lockedUntil = Date.now() + 30000; attempts = 0; }
+      m.className='msg err'; m.textContent='Pogrešna šifra.';
+    }
+  });
+
+  $('logoutBtn').addEventListener('click', function(){ JMU.logout(); showView(); });
+
+  // Promjena šifre
+  var dlg = $('passDialog');
+  $('passBtn').addEventListener('click', function(){ $('passForm').reset(); $('passMsg').className='msg'; dlg.showModal(); });
+  $('passCancel').addEventListener('click', function(){ dlg.close(); });
+  $('passForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var a=$('newPass').value, b=$('newPass2').value, m=$('passMsg');
+    if(a.length<6){ m.className='msg err'; m.textContent='Šifra mora imati najmanje 6 znakova.'; return; }
+    if(a!==b){ m.className='msg err'; m.textContent='Šifre se ne poklapaju.'; return; }
+    JMU.setPass(a); m.className='msg ok'; m.textContent='Šifra je promijenjena.';
+    setTimeout(function(){ dlg.close(); }, 900);
+  });
+
+  // Prikaz termina
+  function todayIso(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+  function fmtDate(s){ var p=s.split('-'); return p[2]+'.'+p[1]+'.'+p[0]+'.'; }
+  var LABEL = {novi:'Novi', potvrdjen:'Potvrđen', otkazan:'Otkazan'};
+
+  function render(){
+    var all = JMU.all();
+    var t = todayIso();
+    var upcoming = all.filter(function(a){ return a.date >= t && a.status !== 'otkazan'; });
+    $('stats').innerHTML =
+      stat(all.filter(function(a){return a.status==='novi';}).length,'Novi zahtjevi') +
+      stat(all.filter(function(a){return a.status==='potvrdjen' && a.date>=t;}).length,'Potvrđeni') +
+      stat(upcoming.length,'Nadolazeći') +
+      stat(all.length,'Ukupno');
+
+    var q = $('search').value.trim().toLowerCase();
+    var st = $('statusFilter').value, rg = $('rangeFilter').value;
+    var rows = all.filter(function(a){
+      if(st && a.status!==st) return false;
+      if(rg==='upcoming' && a.date<t) return false;
+      if(rg==='past' && a.date>=t) return false;
+      if(q && (a.name+' '+a.phone+' '+a.service).toLowerCase().indexOf(q)===-1) return false;
+      return true;
+    }).sort(function(a,b){
+      return rg==='past' ? (b.date+b.time).localeCompare(a.date+a.time) : (a.date+a.time).localeCompare(b.date+b.time);
+    });
+
+    var list = $('list');
+    if(!rows.length){ list.innerHTML = '<div class="empty">Nema termina za prikaz.</div>'; return; }
+    list.innerHTML = rows.map(function(a){
+      var tel = a.phone.replace(/[^\d+]/g,'');
+      return '<div class="appt" data-id="'+JMU.esc(a.id)+'">' +
+        '<div class="when"><span>'+JMU.esc(a.time)+'</span>'+fmtDate(a.date)+'</div>' +
+        '<div class="who"><strong>'+JMU.esc(a.name)+'</strong><span class="badge '+JMU.esc(a.status)+'">'+LABEL[a.status]+'</span>' +
+          '<div>'+JMU.esc(a.service)+' · <a href="tel:'+JMU.esc(tel)+'">'+JMU.esc(a.phone)+'</a></div>' +
+          (a.note?'<div class="note">📝 '+JMU.esc(a.note)+'</div>':'') +
+        '</div>' +
+        '<div class="actions">' +
+          (a.status!=='potvrdjen'?'<button class="btn small" data-act="potvrdjen">Potvrdi</button>':'') +
+          (a.status!=='otkazan'?'<button class="btn small light" data-act="otkazan">Otkaži</button>':'') +
+          '<a class="btn small light" href="tel:'+JMU.esc(tel)+'">📞</a>' +
+          '<button class="btn small danger" data-act="delete">Obriši</button>' +
+        '</div></div>';
+    }).join('');
+  }
+  function stat(n,l){ return '<div class="stat"><b>'+n+'</b>'+l+'</div>'; }
+
+  $('list').addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-act]'); if(!btn) return;
+    var id = btn.closest('.appt').getAttribute('data-id'), act = btn.getAttribute('data-act');
+    if(act==='delete'){ if(confirm('Trajno obrisati ovaj termin?')) JMU.remove(id); }
+    else JMU.update(id,{status:act});
+    render();
+  });
+  ['search','statusFilter','rangeFilter'].forEach(function(id){ $(id).addEventListener('input', render); });
+
+  // Osvježi kad se termin doda u drugom tabu
+  window.addEventListener('storage', function(){ if(JMU.isLoggedIn()) render(); });
+
+  showView();
+})();
+</script>
+</body>
+</html>

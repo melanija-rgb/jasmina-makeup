@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jasmina MakeUp | Get ready to shine</title>
+<meta name="description" content="Jasmina MakeUp, profesionalno šminkanje u Kotor Varošu. Get ready to shine. Zakažite termin online.">
+<meta name="theme-color" content="#fde8ee">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand outline">Jasmina MakeUp</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Meni" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#usluge">Usluge</a></li>
+      <li><a href="#zakazivanje">Zakaži termin</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="tel:+38765480296" class="btn small">📞 065 480 296</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Profesionalno šminkanje · Kotor Varoš</p>
+      <h1 class="outline">Jasmina MakeUp</h1>
+      <p class="slogan outline"><span class="sparkle">✦</span> Get ready to shine <span class="sparkle">✦</span></p>
+      <div class="hero-actions">
+        <a href="#zakazivanje" class="btn">Zakaži termin</a>
+        <a href="tel:+38765480296" class="btn light">📞 Pozovi odmah</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="usluge">
+    <div class="container">
+      <h2 class="section-title outline">Usluge</h2>
+      <hr class="gold-line">
+      <p class="section-sub">Svaki izgled prilagođen vama, od svakodnevnog sjaja do velikih događaja.</p>
+      <div class="grid">
+        <div class="card"><div class="icon">💄</div><h3>Dnevna šminka</h3><p>Svjež i prirodan izgled za svaki dan.</p></div>
+        <div class="card"><div class="icon">✨</div><h3>Večernja šminka</h3><p>Izražajan look za izlaske i proslave.</p></div>
+        <div class="card"><div class="icon">👰</div><h3>Mladenačka šminka</h3><p>Savršen izgled za najvažniji dan.</p></div>
+        <div class="card"><div class="icon">🎓</div><h3>Maturska šminka</h3><p>Za maturu, svečanosti i fotografisanja.</p></div>
+        <div class="card"><div class="icon">🌸</div><h3>Probna šminka</h3><p>Isprobajte look prije velikog događaja.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="zakazivanje" style="background:linear-gradient(180deg,var(--pink),#fff3f6)">
+    <div class="container">
+      <h2 class="section-title outline">Zakaži termin</h2>
+      <hr class="gold-line">
+      <p class="section-sub">Izaberite uslugu, datum i slobodno vrijeme. Potvrdu termina dobijate od Jasmine.</p>
+
+      <form class="form-wrap" id="bookingForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Ime i prezime *</label>
+            <input id="name" name="name" type="text" autocomplete="name" required maxlength="80">
+          </div>
+          <div class="field">
+            <label for="phone">Broj telefona *</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="06x xxx xxx" required maxlength="25">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="service">Usluga *</label>
+          <select id="service" name="service" required>
+            <option value="">Izaberite uslugu…</option>
+            <option>Dnevna šminka</option>
+            <option>Večernja šminka</option>
+            <option>Mladenačka šminka</option>
+            <option>Maturska šminka</option>
+            <option>Probna šminka</option>
+            <option>Ostalo (napišite u napomeni)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="date">Datum *</label>
+          <input id="date" name="date" type="date" required>
+        </div>
+
+        <div class="field">
+          <label>Vrijeme *</label>
+          <div class="slots" id="slots"></div>
+          <span class="hint" id="slotHint">Prvo izaberite datum.</span>
+        </div>
+
+        <div class="field">
+          <label for="note">Napomena (nije obavezno)</label>
+          <textarea id="note" name="note" maxlength="400" placeholder="Npr. lokacija, broj osoba, posebni zahtjevi…"></textarea>
+        </div>
+
+        <button class="btn" type="submit" style="width:100%">Pošalji zahtjev za termin</button>
+        <div class="msg" id="formMsg" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="container">
+      <h2 class="section-title outline">Kontakt</h2>
+      <hr class="gold-line">
+      <p class="section-sub">Slobodno nazovite ili posjetite salon.</p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="card contact-item">
+            <div class="ci">📞</div>
+            <div><strong>Telefon</strong><a href="tel:+38765480296" style="font-weight:700;font-size:1.2rem">065 480 296</a><br><span class="hint">Dodirnite broj za direktan poziv</span></div>
+          </div>
+          <div class="card contact-item">
+            <div class="ci">📍</div>
+            <div><strong>Adresa</strong>Stefana Nemanje 13<br>78220 Kotor Varoš<br>Bosna i Hercegovina</div>
+          </div>
+          <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=44.620443,17.371118" target="_blank" rel="noopener">🧭 Prikaži put do nas</a>
+          <a class="btn light" href="tel:+38765480296">📞 Pozovi</a>
+        </div>
+        <div class="map">
+          <iframe title="Jasmina MakeUp na Google mapi"
+            src="https://www.google.com/maps?q=44.620443,17.371118&z=17&output=embed"
+            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="brand-f">Jasmina MakeUp</div>
+  <p>Get ready to shine ✦</p>
+  <p><small>Stefana Nemanje 13, Kotor Varoš · <a href="tel:+38765480296">065 480 296</a></small></p>
+  <p style="margin-top:10px"><small>© <span id="year"></span> Jasmina MakeUp · <a href="admin.html">Admin</a></small></p>
+</footer>
+
+<a class="call-fab" href="tel:+38765480296" aria-label="Pozovi 065 480 296">📞</a>
+
+<script src="storage.js"></script>
+<script>
+(function(){
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobilni meni
+  var toggle = document.getElementById('navToggle'), links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', function(e){ if(e.target.tagName==='A') links.classList.remove('open'); });
+
+  // Forma
+  var form = document.getElementById('bookingForm');
+  var dateEl = document.getElementById('date');
+  var slotsEl = document.getElementById('slots');
+  var hint = document.getElementById('slotHint');
+  var msg = document.getElementById('formMsg');
+  var selected = '';
+
+  function iso(d){ var m=('0'+(d.getMonth()+1)).slice(-2), day=('0'+d.getDate()).slice(-2); return d.getFullYear()+'-'+m+'-'+day; }
+  var today = new Date();
+  dateEl.min = iso(today);
+
+  function renderSlots(){
+    selected = '';
+    slotsEl.innerHTML = '';
+    var d = dateEl.value;
+    if(!d){ hint.textContent = 'Prvo izaberite datum.'; return; }
+    var taken = JMU.taken(d);
+    var isToday = d === iso(new Date());
+    var nowH = new Date().getHours();
+    var free = 0;
+    JMU.SLOTS.forEach(function(t){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'slot'; b.textContent = t;
+      var past = isToday && parseInt(t,10) <= nowH;
+      if(taken.indexOf(t) > -1 || past){ b.disabled = true; } else { free++; }
+      b.addEventListener('click', function(){
+        selected = t;
+        Array.prototype.forEach.call(slotsEl.children, function(c){ c.classList.remove('selected'); });
+        b.classList.add('selected');
+      });
+      slotsEl.appendChild(b);
+    });
+    hint.textContent = free ? 'Izaberite slobodno vrijeme.' : 'Nema slobodnih termina za ovaj datum. Izaberite drugi datum.';
+  }
+  dateEl.addEventListener('change', renderSlots);
+
+  function show(type, text){ msg.className = 'msg ' + type; msg.textContent = text; }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = form.name.value.trim(), phone = form.phone.value.trim();
+    var service = form.service.value, date = dateEl.value, note = form.note.value.trim();
+    if(!name || !phone || !service || !date){ return show('err','Molimo popunite sva obavezna polja.'); }
+    if(phone.replace(/\D/g,'').length < 8){ return show('err','Unesite ispravan broj telefona.'); }
+    if(!selected){ return show('err','Izaberite vrijeme termina.'); }
+    if(JMU.taken(date).indexOf(selected) > -1){ renderSlots(); return show('err','Taj termin je upravo zauzet. Izaberite drugi.'); }
+    var ok = JMU.add({name:name, phone:phone, service:service, date:date, time:selected, note:note});
+    if(!ok){ return show('err','Greška pri slanju. Pozovite nas na 065 480 296.'); }
+    var d = date.split('-').reverse().join('.');
+    show('ok','Hvala, ' + name + '! Vaš zahtjev za ' + d + '. u ' + selected + ' je poslat. Jasmina će vas kontaktirati radi potvrde.');
+    form.reset(); selected=''; slotsEl.innerHTML=''; hint.textContent='Prvo izaberite datum.';
+    msg.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+})();
+</script>
+</body>
+</html>

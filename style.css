@@ -421,8 +421,8 @@ input:-webkit-autofill{
 .contact-item strong{display:block;font-family:var(--serif);font-size:1.35rem;font-weight:600;color:#f8e7b0}
 .phone-link{font-weight:600;font-size:1.35rem;letter-spacing:.03em;color:#f8e7b0;text-decoration:none}
 .phone-link:hover{text-decoration:underline;text-underline-offset:4px}
-.contact-actions{display:flex;flex-direction:column;gap:10px}
-.contact-actions .btn{width:100%}
+.address-link{color:inherit;text-decoration:none}
+.address-link:hover{text-decoration:underline;text-underline-offset:3px}
 .map{
   border:1px solid var(--line);
   border-radius:var(--radius);

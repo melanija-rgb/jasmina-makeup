@@ -582,8 +582,6 @@ dialog::backdrop{background:rgba(40,28,12,.4)}
   }
   .shine span{display:block}
   .shine-stage{padding:4px 0}
-  .hero-intro{align-self:center;padding-bottom:0;transform:translateY(56px)}
-  .hero .brand-mark{transform:translateY(16px)}
   .starfield .star{width:6px;height:6px}
   .se,.sj{width:8px;height:8px}
 }
@@ -617,6 +615,33 @@ dialog::backdrop{background:rgba(40,28,12,.4)}
   .hero-frame{width:min(1120px,calc(100% - 20px))}
   .eyebrow{letter-spacing:.12em}
   .dock .btn{padding:13px 14px;font-size:.78rem;letter-spacing:.08em}
+}
+@media (max-width:1024px){
+  .hero-intro{
+    position:absolute;
+    top:8px;
+    left:0;
+    right:0;
+    transform:none;
+    align-self:start;
+    padding-bottom:0;
+    z-index:2;
+  }
+  .hero .brand-mark{transform:none}
+  .sa{left:4%;right:auto;top:32%;bottom:auto}
+  .sd{right:4%;left:auto;top:32%;bottom:auto}
+  .sb{left:8%;right:auto;top:42%;bottom:auto}
+  .se{right:8%;left:auto;top:42%;bottom:auto}
+  .sc{left:3%;right:auto;top:52%;bottom:auto}
+  .sf{right:3%;left:auto;top:52%;bottom:auto}
+  .sg{left:7%;right:auto;top:62%;bottom:auto}
+  .sh{right:7%;left:auto;top:62%;bottom:auto}
+  .si{left:5%;right:auto;top:72%;bottom:auto}
+  .sj{right:5%;left:auto;top:72%;bottom:auto}
+  .sk{left:9%;right:auto;top:48%;bottom:auto}
+  .sl{right:9%;left:auto;top:48%;bottom:auto}
+  .sm{left:6%;right:auto;top:68%;bottom:auto}
+  .sn{right:6%;left:auto;top:68%;bottom:auto}
 }
 @media (max-width:380px){
   body:not(.admin-body) .brand{font-size:1.28rem}

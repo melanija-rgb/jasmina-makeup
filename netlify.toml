@@ -1,5 +1,12 @@
+# Statički sajt ostaje u korijenu. Termini i admin prijava su Netlify funkcije.
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Stara adresa admin.html vodi na zasebnu admin stranicu.
-# Sama stranica je admin/index.html i dijeli storage.js sa glavnom stranicom.
 [[redirects]]
   from = "/admin.html"
   to = "/admin/"

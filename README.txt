@@ -1,22 +1,22 @@
 JASMINA MAKEUP - web stranica
 
 FAJLOVI
-  index.html   glavna stranica (usluge, forma za termine, kontakt, Google Maps)
-  admin/index.html   admin stranica (prijava sa šifrom, pregled i upravljanje terminima)
-  style.css    izgled (crna pozadina, zlatna slova)
-  storage.js   čuvanje termina i provjera šifre
+  index.html            glavna stranica
+  admin/index.html      admin stranica (prijava, pregled i upravljanje terminima)
+  style.css             izgled
+  storage.js            veza forme i admina sa serverom
+  netlify/functions     čuvanje termina i provjera šifre
+  netlify.toml          Netlify podešavanje
 
 ADMIN
-  Adresa:  /admin (link "Admin" je u podnožju glavne stranice)
-  Početna šifra: Jasmina2026!
-  Odmah nakon prve prijave kliknite "Promijeni šifru".
+  Adresa: /admin
+  Šifra nije u kodu. Postavlja se u Netlifyu kao ADMIN_PASSWORD.
+  Nakon prijave vide se termini sa svih uređaja, mogu se potvrditi, otkazati ili obrisati.
 
-VAŽNO - ČUVANJE TERMINA I SIGURNOST
-  Trenutno se termini čuvaju u pregledniku uređaja (localStorage). To znači:
-  termin poslat sa telefona klijenta NE stiže na admin stranicu na vašem uređaju.
-  Šifra je provjera u samom pregledniku i ne štiti podatke od tehnički upućene osobe.
-  Za pravo korištenje potrebna je baza i server (npr. Firebase ili Supabase) -
-  sav pristup podacima je u storage.js, pa se zamjenjuje samo taj fajl.
+ČUVANJE TERMINA
+  Zahtjev sa forme čuva se u Netlify Blobs. Isti podaci se vide na admin stranici
+  sa telefona, tableta ili računara. Zauzeto vrijeme više nije slobodno za druge klijente.
 
-POSTAVLJANJE NA INTERNET
-  Sve četiri datoteke stavite u isti folder na hosting (npr. Netlify, GitHub Pages ili vlastiti domen).
+NETLIFY
+  Potrebna je samo jedna podešena vrijednost: ADMIN_PASSWORD.
+  Blobs rade bez dodatnog naloga ili baze.

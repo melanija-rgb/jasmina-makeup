@@ -242,47 +242,64 @@
   var today = new Date();
   dateEl.min = iso(today);
 
+  var slotsReq = 0;
   function renderSlots(){
     selected = '';
     slotsEl.innerHTML = '';
     var d = dateEl.value;
     if(!d){ hint.textContent = 'Prvo izaberite datum.'; return; }
-    var taken = JMU.taken(d);
-    var isToday = d === iso(new Date());
-    var nowH = new Date().getHours();
-    var free = 0;
-    JMU.SLOTS.forEach(function(t){
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'slot'; b.textContent = t;
-      var past = isToday && parseInt(t,10) <= nowH;
-      if(taken.indexOf(t) > -1 || past){ b.disabled = true; } else { free++; }
-      b.addEventListener('click', function(){
-        selected = t;
-        Array.prototype.forEach.call(slotsEl.children, function(c){ c.classList.remove('selected'); });
-        b.classList.add('selected');
+    hint.textContent = 'Učitavanje termina…';
+    var req = ++slotsReq;
+    JMU.taken(d).then(function(taken){
+      if(req !== slotsReq || dateEl.value !== d) return;
+      var isToday = d === iso(new Date());
+      var nowH = new Date().getHours();
+      var free = 0;
+      JMU.SLOTS.forEach(function(t){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'slot'; b.textContent = t;
+        var past = isToday && parseInt(t,10) <= nowH;
+        if(taken.indexOf(t) > -1 || past){ b.disabled = true; } else { free++; }
+        b.addEventListener('click', function(){
+          selected = t;
+          Array.prototype.forEach.call(slotsEl.children, function(c){ c.classList.remove('selected'); });
+          b.classList.add('selected');
+        });
+        slotsEl.appendChild(b);
       });
-      slotsEl.appendChild(b);
+      hint.textContent = free ? 'Izaberite slobodno vrijeme.' : 'Nema slobodnih termina za ovaj datum. Izaberite drugi datum.';
+    }).catch(function(){
+      if(req !== slotsReq) return;
+      hint.textContent = 'Termine trenutno ne možemo učitati. Pokušajte ponovo.';
     });
-    hint.textContent = free ? 'Izaberite slobodno vrijeme.' : 'Nema slobodnih termina za ovaj datum. Izaberite drugi datum.';
   }
   dateEl.addEventListener('change', renderSlots);
 
   function show(type, text){ msg.className = 'msg ' + type; msg.textContent = text; }
 
+  var sending = false;
   form.addEventListener('submit', function(e){
     e.preventDefault();
+    if(sending) return;
     var name = form.name.value.trim(), phone = form.phone.value.trim();
     var service = form.service.value, date = dateEl.value, note = form.note.value.trim();
     if(!name || !phone || !service || !date){ return show('err','Molimo popunite sva obavezna polja.'); }
     if(phone.replace(/\D/g,'').length < 8){ return show('err','Unesite ispravan broj telefona.'); }
     if(!selected){ return show('err','Izaberite vrijeme termina.'); }
-    if(JMU.taken(date).indexOf(selected) > -1){ renderSlots(); return show('err','Taj termin je upravo zauzet. Izaberite drugi.'); }
-    var ok = JMU.add({name:name, phone:phone, service:service, date:date, time:selected, note:note});
-    if(!ok){ return show('err','Greška pri slanju. Pozovite nas na 065 480 296.'); }
-    var d = date.split('-').reverse().join('.');
-    show('ok','Hvala, ' + name + '! Vaš zahtjev za ' + d + '. u ' + selected + ' je poslat. Jasmina će vas kontaktirati radi potvrde.');
-    form.reset(); selected=''; slotsEl.innerHTML=''; hint.textContent='Prvo izaberite datum.';
-    msg.scrollIntoView({behavior:'smooth', block:'center'});
+    sending = true;
+    var submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    JMU.add({name:name, phone:phone, service:service, date:date, time:selected, note:note}).then(function(result){
+      if(result.conflict){ renderSlots(); return show('err','Taj termin je upravo zauzet. Izaberite drugi.'); }
+      if(!result.ok){ return show('err', result.error || 'Greška pri slanju. Pozovite nas na 065 480 296.'); }
+      var d = date.split('-').reverse().join('.');
+      show('ok','Hvala, ' + name + '! Vaš zahtjev za ' + d + '. u ' + selected + ' je poslat. Jasmina će vas kontaktirati radi potvrde.');
+      form.reset(); selected=''; slotsEl.innerHTML=''; hint.textContent='Prvo izaberite datum.';
+      msg.scrollIntoView({behavior:'smooth', block:'center'});
+    }).finally(function(){
+      sending = false;
+      submitBtn.disabled = false;
+    });
   });
 })();
 </script>

@@ -44,7 +44,6 @@
   <main class="container" style="padding-bottom:60px">
     <div class="admin-top">
       <h1 class="outline">Termini</h1>
-      <button class="btn small light" id="passBtn">🔑 Promijeni šifru</button>
     </div>
 
     <div class="stats" id="stats"></div>
@@ -68,69 +67,53 @@
   </main>
 </div>
 
-<dialog id="passDialog">
-  <form id="passForm">
-    <h2 class="outline" style="margin-bottom:14px">Nova šifra</h2>
-    <div class="field"><label for="newPass">Nova šifra (min. 6 znakova)</label><input id="newPass" type="password" minlength="6" required autocomplete="new-password"></div>
-    <div class="field"><label for="newPass2">Ponovite šifru</label><input id="newPass2" type="password" minlength="6" required autocomplete="new-password"></div>
-    <div class="msg" id="passMsg"></div>
-    <div style="display:flex;gap:10px;margin-top:14px">
-      <button class="btn small" type="submit">Sačuvaj</button>
-      <button class="btn small light" type="button" id="passCancel">Zatvori</button>
-    </div>
-  </form>
-</dialog>
-
 <script src="/storage.js"></script>
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
   var loginView = $('loginView'), panelView = $('panelView');
-  var attempts = 0, lockedUntil = 0;
+  var rowsCache = [];
 
-  function showView(){
-    var on = JMU.isLoggedIn();
-    loginView.hidden = on; panelView.hidden = !on;
-    if(on) render(); else $('pass').focus();
+  function showLogin(){
+    loginView.hidden = false;
+    panelView.hidden = true;
+    $('pass').focus();
+  }
+  function showPanel(){
+    loginView.hidden = true;
+    panelView.hidden = false;
+    render();
   }
 
   $('loginForm').addEventListener('submit', function(e){
     e.preventDefault();
     var m = $('loginMsg');
-    if(Date.now() < lockedUntil){
-      m.className='msg err'; m.textContent='Previše pokušaja. Pokušajte ponovo za nekoliko sekundi.'; return;
-    }
-    if(JMU.checkPass($('pass').value)){
-      attempts = 0; JMU.login(); $('pass').value=''; m.className='msg'; showView();
-    } else {
-      attempts++;
-      if(attempts >= 5){ lockedUntil = Date.now() + 30000; attempts = 0; }
-      m.className='msg err'; m.textContent='Pogrešna šifra.';
-    }
+    var btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    JMU.login($('pass').value).then(function(result){
+      if(result.ok){
+        $('pass').value = '';
+        m.className = 'msg';
+        return load();
+      }
+      m.className = 'msg err';
+      m.textContent = result.error || 'Pogrešna šifra.';
+    }).finally(function(){ btn.disabled = false; });
   });
 
-  $('logoutBtn').addEventListener('click', function(){ JMU.logout(); showView(); });
-
-  // Promjena šifre
-  var dlg = $('passDialog');
-  $('passBtn').addEventListener('click', function(){ $('passForm').reset(); $('passMsg').className='msg'; dlg.showModal(); });
-  $('passCancel').addEventListener('click', function(){ dlg.close(); });
-  $('passForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    var a=$('newPass').value, b=$('newPass2').value, m=$('passMsg');
-    if(a.length<6){ m.className='msg err'; m.textContent='Šifra mora imati najmanje 6 znakova.'; return; }
-    if(a!==b){ m.className='msg err'; m.textContent='Šifre se ne poklapaju.'; return; }
-    JMU.setPass(a); m.className='msg ok'; m.textContent='Šifra je promijenjena.';
-    setTimeout(function(){ dlg.close(); }, 900);
+  $('logoutBtn').addEventListener('click', function(){
+    JMU.logout().finally(function(){
+      rowsCache = [];
+      showLogin();
+    });
   });
 
-  // Prikaz termina
   function todayIso(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
-  function fmtDate(s){ var p=s.split('-'); return p[2]+'.'+p[1]+'.'+p[0]+'.'; }
+  function fmtDate(s){ var p=String(s||'').split('-'); return p.length===3 ? p[2]+'.'+p[1]+'.'+p[0]+'.' : ''; }
   var LABEL = {novi:'Novi', potvrdjen:'Potvrđen', otkazan:'Otkazan'};
 
   function render(){
-    var all = JMU.all();
+    var all = rowsCache;
     var t = todayIso();
     var upcoming = all.filter(function(a){ return a.date >= t && a.status !== 'otkazan'; });
     $('stats').innerHTML =
@@ -154,10 +137,10 @@
     var list = $('list');
     if(!rows.length){ list.innerHTML = '<div class="empty">Nema termina za prikaz.</div>'; return; }
     list.innerHTML = rows.map(function(a){
-      var tel = a.phone.replace(/[^\d+]/g,'');
+      var tel = String(a.phone||'').replace(/[^\d+]/g,'');
       return '<div class="appt" data-id="'+JMU.esc(a.id)+'">' +
         '<div class="when"><span>'+JMU.esc(a.time)+'</span>'+fmtDate(a.date)+'</div>' +
-        '<div class="who"><strong>'+JMU.esc(a.name)+'</strong><span class="badge '+JMU.esc(a.status)+'">'+LABEL[a.status]+'</span>' +
+        '<div class="who"><strong>'+JMU.esc(a.name)+'</strong><span class="badge '+JMU.esc(a.status)+'">'+(LABEL[a.status]||'')+'</span>' +
           '<div>'+JMU.esc(a.service)+' · <a href="tel:'+JMU.esc(tel)+'">'+JMU.esc(a.phone)+'</a></div>' +
           (a.note?'<div class="note">📝 '+JMU.esc(a.note)+'</div>':'') +
         '</div>' +
@@ -171,19 +154,35 @@
   }
   function stat(n,l){ return '<div class="stat"><b>'+n+'</b>'+l+'</div>'; }
 
+  function load(){
+    return JMU.all().then(function(res){
+      if(!res.ok){ showLogin(); return; }
+      rowsCache = res.bookings;
+      showPanel();
+    }).catch(function(){
+      if(!panelView.hidden) $('list').innerHTML = '<div class="empty">Termine trenutno ne možemo učitati.</div>';
+      else showLogin();
+    });
+  }
+
   $('list').addEventListener('click', function(e){
     var btn = e.target.closest('button[data-act]'); if(!btn) return;
     var id = btn.closest('.appt').getAttribute('data-id'), act = btn.getAttribute('data-act');
-    if(act==='delete'){ if(confirm('Trajno obrisati ovaj termin?')) JMU.remove(id); }
-    else JMU.update(id,{status:act});
-    render();
+    var job = act==='delete'
+      ? (confirm('Trajno obrisati ovaj termin?') ? JMU.remove(id) : null)
+      : JMU.update(id,{status:act});
+    if(!job) return;
+    job.then(function(bookings){
+      rowsCache = bookings;
+      render();
+    }).catch(function(){
+      $('list').insertAdjacentHTML('afterbegin','<div class="msg err" style="display:block;margin-bottom:12px">Promjena nije sačuvana. Pokušajte ponovo.</div>');
+    });
   });
   ['search','statusFilter','rangeFilter'].forEach(function(id){ $(id).addEventListener('input', render); });
+  window.addEventListener('focus', function(){ if(!panelView.hidden) load(); });
 
-  // Osvježi kad se termin doda u drugom tabu
-  window.addEventListener('storage', function(){ if(JMU.isLoggedIn()) render(); });
-
-  showView();
+  load();
 })();
 </script>
 </body>

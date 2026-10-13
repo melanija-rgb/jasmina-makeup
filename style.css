@@ -545,6 +545,13 @@ body:not(.admin-body){padding-bottom:96px}
 }
 
 /* Admin */
+.admin-body header.nav .nav-inner{
+  height:auto;
+  min-height:var(--nav-h);
+  flex-wrap:wrap;
+  padding-top:8px;
+  padding-bottom:8px;
+}
 .login-box{
   max-width:420px;margin:90px auto;
   background:var(--card);border:1px solid var(--line);border-radius:24px;

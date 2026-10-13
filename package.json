@@ -1,0 +1,8 @@
+{
+  "name": "jasmina-makeup",
+  "private": true,
+  "description": "Jasmina MakeUp static site with Netlify Functions for bookings and admin login.",
+  "dependencies": {
+    "@netlify/blobs": "^10.7.4"
+  }
+}

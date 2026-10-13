@@ -16,7 +16,7 @@
 <header class="nav">
   <div class="container nav-inner">
     <a href="#top" class="brand outline">Jasmina MakeUp</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Meni" aria-expanded="false">☰</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Meni" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#usluge">Usluge</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
@@ -26,24 +26,31 @@
 
 <main id="top">
   <section class="hero">
+    <div class="starfield" aria-hidden="true">
+      <svg class="star sa" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sb" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sc" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sd" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star se" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sf" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sg" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sh" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star si" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sj" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sk" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sl" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sm" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+      <svg class="star sn" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
+    </div>
     <div class="hero-frame">
-      <p class="eyebrow">Profesionalno šminkanje · Kotor Varoš</p>
-      <p class="brand-mark outline">Jasmina MakeUp</p>
+      <div class="hero-intro">
+        <p class="eyebrow">Profesionalno šminkanje · Kotor Varoš</p>
+        <p class="brand-mark outline">Jasmina MakeUp</p>
+      </div>
       <div class="shine-stage">
-        <div class="starfield" aria-hidden="true">
-          <svg class="star sa" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
-          <svg class="star sb" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
-          <svg class="star sc" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
-          <svg class="star sd" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
-          <svg class="star se" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
-          <svg class="star sf" viewBox="0 0 12 12"><path d="M6 0l.9 5.1L12 6l-5.1.9L6 12l-.9-5.1L0 6l5.1-.9z"/></svg>
-        </div>
         <h1 class="shine"><span>Get ready</span> <span>to shine</span></h1>
       </div>
-      <div class="hero-actions">
-        <a href="#zakazivanje" class="btn btn-book">Zakaži termin</a>
-        <a href="tel:+38765480296" class="btn light">📞 Pozovi</a>
-      </div>
+      <div class="hero-balance" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -57,9 +64,6 @@
         <div class="card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M30 12a11 11 0 1 0 8 16 9 9 0 1 1-8-16z"/><path d="M16 10l.8 2.4L19.2 13l-2.4.8L16 16.2l-.8-2.4L12.8 13l2.4-.6z"/></svg></div><h3>Večernja šminka</h3><p>Izražajan look za izlaske i proslave.</p></div>
         <div class="card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 8l3.2 6.4L34 16l-5 4.2L30.4 27 24 23.4 17.6 27 19 20.2 14 16l6.8-1.6z"/><circle cx="24" cy="34" r="6"/></svg></div><h3>Mladenačka šminka</h3><p>Savršen izgled za najvažniji dan.</p></div>
         <div class="card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 20l16-8 16 8-16 8z"/><path d="M16 24v8c0 3 3.6 6 8 6s8-3 8-6v-8"/><path d="M40 20v10"/></svg></div><h3>Maturska šminka</h3><p>Za maturu, svečanosti i fotografisanja.</p></div>
-      </div>
-      <div class="center-cta">
-        <a href="#zakazivanje" class="btn btn-book">Zakaži termin</a>
       </div>
     </div>
   </section>
@@ -148,9 +152,9 @@
   <p style="margin-top:10px"><small>© <span id="year"></span> Jasmina MakeUp</small></p>
 </footer>
 
-<div class="book-bar">
+<div class="dock">
   <a class="btn btn-book" href="#zakazivanje">Zakaži termin</a>
-  <a class="call-fab" href="tel:+38765480296" aria-label="Pozovi 065 480 296">📞</a>
+  <a class="btn dock-call" href="tel:+38765480296">📞 Pozovi</a>
 </div>
 
 <button type="button" class="to-top" id="toTop" aria-label="Nazad na vrh">
@@ -199,11 +203,12 @@
 
   // Mobilni meni
   var toggle = document.getElementById('navToggle'), links = document.getElementById('navLinks');
-  toggle.addEventListener('click', function(){
-    var open = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-  links.addEventListener('click', function(e){ if(e.target.tagName==='A') links.classList.remove('open'); });
+  function setMenu(open){
+    links.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  toggle.addEventListener('click', function(){ setMenu(!links.classList.contains('open')); });
+  links.addEventListener('click', function(e){ if(e.target.tagName==='A') setMenu(false); });
 
   // Forma
   var form = document.getElementById('bookingForm');

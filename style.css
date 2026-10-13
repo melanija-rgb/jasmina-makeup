@@ -519,6 +519,9 @@ body:not(.admin-body){padding-bottom:96px}
   border-color:#fff1c4;
   box-shadow:0 12px 26px rgba(212,175,55,.38), inset 0 1px 0 rgba(255,255,255,.65);
 }
+@media (min-width:1025px){
+  .dock-call{display:none}
+}
 
 /* Admin */
 .login-box{

@@ -82,6 +82,14 @@ header.nav{
   border-bottom:1px solid var(--line);
 }
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);gap:16px}
+@media (min-width:721px){
+  body:not(.admin-body) header.nav .nav-inner{
+    width:100%;
+    margin:0;
+    padding-left:16px;
+    padding-right:28px;
+  }
+}
 .brand{
   font-size:1.85rem;
   text-decoration:none;
